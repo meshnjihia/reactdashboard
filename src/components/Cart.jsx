@@ -7,7 +7,13 @@ import { cartData } from "../data/dummy";
 import { Button } from ".";
 
 const Cart = () => {
-  const { currentColor } = useStateContext();
+  const { currentColor, setTopOpen, topOpen } = useStateContext();
+
+    const handleCloseOpenTop = () => {
+      if (topOpen) {
+        setTopOpen(false);
+      }
+    };
 
   return (
     <div className="bg-half-transparent w-full fixed nav-item top-0 right-0 ">
@@ -15,11 +21,18 @@ const Cart = () => {
         <div className="flex justify-between items-center">
           <p className="font-semibold text-lg">Shopping Cart</p>
           <Button
-            icon={<MdOutlineCancel />}
-            color="rgb(153, 171, 180)"
+            // icon={<MdOutlineCancel />}
+            color="#fff"
             bgHoverColor="light-gray"
             size="2xl"
             borderRadius="50%"
+            onClick={handleCloseOpenTop}
+          />
+          <MdOutlineCancel
+            type="button"
+            onClick={() => setTopOpen(!topOpen)}
+            style={{ color: currentColor }}
+            className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
           />
         </div>
         {cartData?.map((item, index) => (
@@ -54,11 +67,11 @@ const Cart = () => {
         <div className="mt-3 mb-3">
           <div className="flex justify-between items-center">
             <p className="text-gray-500 dark:text-gray-200">Sub Total</p>
-            <p className="font-semibold">$890</p>
+            <p className="font-semibold">Ksh 890</p>
           </div>
           <div className="flex justify-between items-center mt-3">
             <p className="text-gray-500 dark:text-gray-200">Total</p>
-            <p className="font-semibold">$890</p>
+            <p className="font-semibold">ksh 890</p>
           </div>
         </div>
         <div className="mt-5">
